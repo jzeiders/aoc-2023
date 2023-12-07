@@ -10,7 +10,7 @@
 #include <map>
 
 #include "solver.hpp"
-#include "common.hpp"
+#include "common/common.hpp"
 
 enum class Color
 {
@@ -19,7 +19,7 @@ enum class Color
     Blue
 };
 
-inline Color parseColor(const std::string &colorStr)
+static Color parseColor(const std::string &colorStr)
 {
     if (colorStr == "green")
         return Color::Green;
@@ -47,7 +47,7 @@ struct Game
     std::vector<Turn> turns;
 };
 
-inline Draw parseColorQuantityPair(const std::string &str)
+static Draw parseColorQuantityPair(const std::string &str)
 {
     std::istringstream iss(str);
     Draw cqp;
@@ -57,7 +57,7 @@ inline Draw parseColorQuantityPair(const std::string &str)
     return cqp;
 }
 
-inline Turn parseTurn(const std::string &str)
+static Turn parseTurn(const std::string &str)
 {
     Turn turn;
     auto pairs = split(str, ',');
@@ -68,7 +68,7 @@ inline Turn parseTurn(const std::string &str)
     return turn;
 }
 
-inline Game parseGame(const std::string &str)
+static Game parseGame(const std::string &str)
 {
     Game game;
     auto gameParts = split(str, ':');
@@ -83,7 +83,7 @@ inline Game parseGame(const std::string &str)
     return game;
 }
 
-inline bool drawIsInvalid(Draw draw)
+static bool drawIsInvalid(Draw draw)
 {
     switch (draw.color)
     {

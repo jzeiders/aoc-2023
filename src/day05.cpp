@@ -2,7 +2,7 @@
 #define SRC_DAY05_HPP
 
 #include "solver.hpp"
-#include "common.hpp"
+#include "common/common.hpp"
 
 #include <iostream>
 #include <sstream>

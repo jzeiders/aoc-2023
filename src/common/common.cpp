@@ -1,13 +1,13 @@
-#ifndef COMMON_HPP
-#define COMMON_HPP
+#include "common.hpp"
 
 #include <iostream>
 #include <vector>
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <numeric>
 
-inline std::vector<std::string> split(const std::string &str, char delimiter)
+std::vector<std::string> split(const std::string &str, char delimiter)
 {
     std::vector<std::string> tokens;
     std::string token;
@@ -30,9 +30,7 @@ void print(const T &container)
     std::cout << std::endl;
 }
 
-inline int sumVector(const std::vector<int> &numbers)
+int sumVector(const std::vector<int> &numbers)
 {
     return std::accumulate(numbers.begin(), numbers.end(), 0);
 }
-
-#endif // COMMON_HPP

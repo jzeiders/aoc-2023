@@ -1,5 +1,4 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#pragma once
 
 template <typename T>
 class DirectedGraph
@@ -76,5 +75,3 @@ public:
         DirectedGraph::addEdge(to, from, weight);
     }
 }
-
-#endif // End Graph

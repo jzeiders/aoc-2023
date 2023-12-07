@@ -2,19 +2,19 @@
 #define SRC_DAY06_HPP
 
 #include "solver.hpp"
-#include "common.hpp"
+#include "common/common.hpp"
 
 #include <iostream>
 #include <sstream>
 #include <set>
 #include <algorithm>
 
-int computeDistance(int totalTime, int chargeTime)
+static int computeDistance(int totalTime, int chargeTime)
 {
     return chargeTime * (totalTime - chargeTime);
 }
 
-std::vector<int> possibilities(int totalTime)
+static std::vector<int> possibilities(int totalTime)
 {
     std::vector<int> result;
     for (int i = 0; i < totalTime; i++)
@@ -24,7 +24,7 @@ std::vector<int> possibilities(int totalTime)
     return result;
 }
 
-long possibilitiesQuick(long totalTime, long dist)
+static long possibilitiesQuick(long totalTime, long dist)
 {
     double term = std::sqrt(totalTime * totalTime - 4 * dist);
     double lower = (totalTime - term) / 2;

@@ -1,17 +1,27 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 project(AdventOfCode)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  # Specify the commit you depend on and update it regularly.
+  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
+)
+FetchContent_MakeAvailable(googletest)
+
 
 # Add source files
-file(GLOB SRC_FILES "src/*.cpp")
+include_directories(src)
+add_subdirectory(src)
 
-# Include directories
-include_directories(include)
-# Add executable target
-add_executable(AdventOfCode ${SRC_FILES})
-
+# Test Files
+enable_testing()
+add_subdirectory(tests)
 
 # Link with libraries if needed
 # target_link_libraries(AdventOfCode some_library)
+add_test (NAME MyTest COMMAND Test)
