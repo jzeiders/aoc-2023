@@ -40,7 +40,6 @@ public:
 
         std::cout << "Day " << getDay() << " full" << std::endl;
         long fullSolution = this->solution2(this->loadMainFile());
-        std::cout << fullSolution << std::endl;
         return fullSolution;
     }
 
