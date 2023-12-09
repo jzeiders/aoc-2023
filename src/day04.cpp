@@ -44,7 +44,7 @@ public:
         return std::make_pair(first, second);
     }
 
-    int solveItem(Card card) override
+    long solveItem(Card card) override
     {
         std::set<int> winningNumbers(card.first.begin(), card.first.end());
         std::set<int> values(card.second.begin(), card.second.end());
@@ -54,18 +54,18 @@ public:
         return inter.size();
     }
 
-    int solveItem2(Card card) override
+    long solveItem2(Card card) override
     {
         return solveItem(card);
     }
 
-    int combine(std::vector<int> results) override
+    long combine(std::vector<long> results) override
     {
         // Sum the vector
         return combine2(results);
     }
 
-    int combine1(std::vector<int> results)
+    long combine1(std::vector<long> results)
     {
         int sum = 0;
         for (int result : results)
@@ -78,7 +78,7 @@ public:
         return sum;
     }
 
-    int combine2(std::vector<int> results)
+    long combine2(std::vector<long> results)
     {
         std::vector counts = std::vector<int>(results.size(), 1);
         for (int i = 0; i < results.size(); i++)

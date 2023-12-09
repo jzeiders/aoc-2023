@@ -9,7 +9,8 @@
 #include "day04.cpp"
 #include "day05.cpp"
 #include "day06.cpp"
-#include "day07.cpp"
+#include "day07/day07.hpp"
+#include "day08/day08.hpp"
 
 int main(int argc, char **argv)
 {
@@ -27,6 +28,7 @@ int main(int argc, char **argv)
     solvers.push_back(std::make_unique<Day5Solver>());
     solvers.push_back(std::make_unique<Day6Solver>());
     solvers.push_back(std::make_unique<Day7Solver>());
+    solvers.push_back(std::make_unique<Day8Solver>());
 
     std::string day = argv[1];
     std::string part = argv[2];

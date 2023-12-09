@@ -1,47 +1,40 @@
 #pragma once
 
-template <typename T>
+#include <map>
+#include <vector>
+#include <set>
+
+template <typename N, typename T>
 class DirectedGraph
 {
-    std::map<int, T> nodes;
-    std::map<int, std::make_pair<int, int>> weights;
-    std::map<int, std::vector<int>> adjacencyList;
+    std::map<N, T> nodes;
+    std::map<N, std::vector<N>> adjacencyList;
 
 public:
-    void addNode(int id, T node)
+    void addNode(N id, T node)
     {
         nodes[id] = node;
     }
 
-    void addEdge(int from, int to, int weight)
+    void addEdge(N from, N to)
     {
-        if (nodes[from] == NULL)
-            throw std::runtime_error("Node " + from + " does not exist");
-        if (nodes[to] == NULL)
-            throw std::runtime_error("Node " + to + " does not exist");
-        weights[std::make_pair(from, to)] = weight;
         adjacencyList[from].push_back(to);
     }
 
-    T getNode(int id)
+    T getNode(N id)
     {
         return nodes[id];
     }
 
-    std::vector<int> getNeighbors(int id)
+    std::vector<N> getNeighbors(N id)
     {
         return adjacencyList[id];
     }
 
-    int getWeight(int from, int to)
+    std::vector<N> topologicalSort()
     {
-        return weights[std::make_pair(from, to)];
-    }
-
-    std::vector<int> topologicalSort()
-    {
-        std::vector<int> sorted;
-        std::set<int> visited;
+        std::vector<N> sorted;
+        std::set<N> visited;
         for (auto node : nodes)
         {
             topologicalSortUtil(node.first, visited, sorted);
@@ -50,7 +43,7 @@ public:
     }
 
 private:
-    void topologicalSortUtil(int id, std::set<int> &visited, std::vector<int> &sorted)
+    void topologicalSortUtil(N id, std::set<N> &visited, std::vector<N> &sorted)
     {
         if (visited.find(id) != visited.end())
         {
@@ -65,13 +58,13 @@ private:
     }
 };
 
-template <typename T>
-class UndirectedGraph : public DirectedGraph<T>
+template <typename N, typename T>
+class UndirectedGraph : public DirectedGraph<N, T>
 {
 public:
-    void addEdge(int from, int to, int weight)
+    void addEdge(N from, N to)
     {
-        DirectedGraph::addEdge(from, to, weight);
-        DirectedGraph::addEdge(to, from, weight);
+        DirectedGraph<N, T>::addEdge(from, to);
+        DirectedGraph<N, T>::addEdge(to, from);
     }
-}
+};

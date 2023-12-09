@@ -47,7 +47,7 @@ public:
         return "6";
     }
 
-    int solution(std::ifstream *file) override
+    long solution(std::ifstream *file) override
     {
         auto input = parse(file);
         int result = 1;
@@ -63,7 +63,7 @@ public:
         return result;
     }
 
-    int solution2(std::ifstream *file) override
+    long solution2(std::ifstream *file) override
     {
         // Concatenate input
         auto input = parse(file);

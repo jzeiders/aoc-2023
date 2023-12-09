@@ -142,7 +142,7 @@ public:
         return "5";
     }
 
-    int solution(std::ifstream *file) override
+    long solution(std::ifstream *file) override
     {
         auto input = parseInput(file);
         auto values = input.first;
@@ -167,7 +167,7 @@ public:
         return *std::min_element(starts.begin(), starts.end());
     }
 
-    int solution2(std::ifstream *file) override
+    long solution2(std::ifstream *file) override
     {
 
         auto input = parseInput(file);

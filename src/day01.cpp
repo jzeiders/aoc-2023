@@ -54,7 +54,7 @@ public:
         // Parse to int
     }
 
-    int solveItem(std::string item) override
+    long solveItem(std::string item) override
     {
         std::string firstDigit = findFirstDigit(item);
 
@@ -102,7 +102,7 @@ public:
         }
     }
 
-    int solveItem2(std::string item) override
+    long solveItem2(std::string item) override
     {
 
         processString(item);
@@ -111,10 +111,10 @@ public:
         return this->solveItem(item);
     }
 
-    int combine(std::vector<int> results) override
+    long combine(std::vector<long> results) override
     {
-        int sum = 0;
-        for (int result : results)
+        long sum = 0;
+        for (long result : results)
         {
             sum += result;
         }

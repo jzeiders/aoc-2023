@@ -10,7 +10,7 @@ class Day3Solver : public GridSolver
 {
 public:
     std::string getDay() override { return "3"; }
-    int solveGrid(Grid<char> &grid) override
+    long solveGrid(Grid<char> &grid) override
     {
         int sum = 0;
         for (int j = 0; j < grid.height(); j++)
@@ -36,7 +36,7 @@ public:
         return sum;
     }
 
-    int solveGrid2(Grid<char> &grid) override
+    long solveGrid2(Grid<char> &grid) override
     {
         std::map<Point, std::vector<int>> gearCandidates;
         int sum = 0;

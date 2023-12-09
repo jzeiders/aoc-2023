@@ -111,7 +111,7 @@ public:
         return parseGame(line);
     }
 
-    int solveItem(Game game) override
+    long solveItem(Game game) override
     {
         for (auto turn : game.turns)
         {
@@ -126,7 +126,7 @@ public:
         return game.gameID;
     }
 
-    int solveItem2(Game item) override
+    long solveItem2(Game item) override
     {
         std::map<Color, int> colorCounts;
         colorCounts[Color::Red] = 0;
@@ -144,7 +144,7 @@ public:
         return colorCounts[Color::Red] * colorCounts[Color::Green] * colorCounts[Color::Blue];
     }
 
-    int combine(std::vector<int> results) override
+    long combine(std::vector<long> results) override
     {
         return std::accumulate(results.begin(), results.end(), 0);
     }

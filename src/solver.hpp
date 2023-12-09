@@ -16,31 +16,30 @@ public:
     virtual ~Solver(){};
     virtual std::string getDay() = 0;
 
-    virtual int solution(std::ifstream *file) = 0;
-    virtual int solution2(std::ifstream *file) = 0;
+    virtual long solution(std::ifstream *file) = 0;
+    virtual long solution2(std::ifstream *file) = 0;
 
-    int solve()
+    long solve()
     {
-        std::cout << "Day " << getDay() << " small" << std::endl;
+        std::cout << "Small" << std::endl;
         std::ifstream *smallFile = this->loadFile("/Users/jzeiders/Documents/Code/Mars/AOC/data/day" + getDay() + "_small.txt");
-        int smallSolution = this->solution(smallFile);
+        long smallSolution = this->solution(smallFile);
         std::cout << smallSolution << std::endl;
 
-        std::cout << "Day " << getDay() << " full" << std::endl;
-        int fullSolution = this->solution(this->loadMainFile());
-        std::cout << fullSolution << std::endl;
+        std::cout << "Full" << std::endl;
+        long fullSolution = this->solution(this->loadMainFile());
         return fullSolution;
     }
 
-    int solve2()
+    long solve2()
     {
         std::cout << "Day " << getDay() << " small" << std::endl;
         std::ifstream *smallFile = this->loadFile("/Users/jzeiders/Documents/Code/Mars/AOC/data/day" + getDay() + "_small2.txt");
-        int smallSolution = this->solution2(smallFile);
+        long smallSolution = this->solution2(smallFile);
         std::cout << smallSolution << std::endl;
 
         std::cout << "Day " << getDay() << " full" << std::endl;
-        int fullSolution = this->solution2(this->loadMainFile());
+        long fullSolution = this->solution2(this->loadMainFile());
         std::cout << fullSolution << std::endl;
         return fullSolution;
     }
@@ -63,7 +62,7 @@ private:
     }
 };
 
-template <typename T>
+template <typename T, typename S = long>
 class LineSolver : public Solver
 {
 public:
@@ -71,22 +70,22 @@ public:
     ~LineSolver(){};
 
     virtual T parse(std::string line) = 0;
-    virtual int solveItem(T item) = 0;
-    virtual int solveItem2(T item) = 0;
-    virtual int combine(std::vector<int> results) = 0;
+    virtual S solveItem(T item) = 0;
+    virtual S solveItem2(T item) = 0;
+    virtual long combine(std::vector<S> results) = 0;
 
-    int solution(std::ifstream *file) override
+    long solution(std::ifstream *file) override
     {
         return solver(file, 1);
     }
 
-    int solution2(std::ifstream *file) override
+    long solution2(std::ifstream *file) override
     {
         return solver(file, 2);
     }
 
 private:
-    int solver(std::ifstream *file, int part)
+    long solver(std::ifstream *file, int part)
     {
 
         std::vector<T> parses = std::vector<T>();
@@ -102,7 +101,7 @@ private:
             file->close();
         }
 
-        std::vector<int> results;
+        std::vector<S> results;
         auto solver = [this, part](const T &item)
         { return part == 1 ? this->solveItem(item) : this->solveItem2(item); };
 
@@ -117,16 +116,16 @@ class GridSolver : public Solver
 public:
     GridSolver() : Solver(){};
 
-    virtual int solveGrid(Grid<char> &grid) = 0;
-    virtual int solveGrid2(Grid<char> &grid) = 0;
+    virtual long solveGrid(Grid<char> &grid) = 0;
+    virtual long solveGrid2(Grid<char> &grid) = 0;
 
-    int solution(std::ifstream *file)
+    long solution(std::ifstream *file)
     {
         auto grid = parseGrid(file);
         return solveGrid(grid);
     }
 
-    int solution2(std::ifstream *file)
+    long solution2(std::ifstream *file)
     {
         auto grid = parseGrid(file);
         return solveGrid2(grid);
