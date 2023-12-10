@@ -21,6 +21,11 @@ public:
         adjacencyList[from].push_back(to);
     }
 
+    bool hasNode(N id)
+    {
+        return nodes.find(id) != nodes.end();
+    }
+
     T getNode(N id)
     {
         return nodes[id];
@@ -40,6 +45,30 @@ public:
             topologicalSortUtil(node.first, visited, sorted);
         }
         return sorted;
+    }
+
+    std::map<N, int> distances(N start)
+    {
+        std::map<N, int> distances;
+        std::set<N> q = {start};
+        while (q.size())
+        {
+            std::set<N> next;
+            for (auto current : q)
+            {
+                auto neighbors = getNeighbors(current);
+                for (auto neighbor : neighbors)
+                {
+                    if (distances.find(neighbor) == distances.end())
+                    {
+                        distances[neighbor] = distances[current] + 1;
+                        q.insert(neighbor);
+                    }
+                }
+            }
+            q = next;
+        }
+        return distances;
     }
 
 private:

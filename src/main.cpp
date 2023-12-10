@@ -12,6 +12,7 @@
 #include "day07/day07.hpp"
 #include "day08/day08.hpp"
 #include "day09/day09.hpp"
+#include "day10/day10.hpp"
 
 int main(int argc, char **argv)
 {
@@ -31,6 +32,7 @@ int main(int argc, char **argv)
     solvers.push_back(std::make_unique<Day7Solver>());
     solvers.push_back(std::make_unique<Day8Solver>());
     solvers.push_back(std::make_unique<Day9Solver>());
+    solvers.push_back(std::make_unique<Day10Solver>());
 
     std::string day = argv[1];
     std::string part = argv[2];

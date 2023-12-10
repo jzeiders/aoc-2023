@@ -19,6 +19,37 @@ struct Point
         }
         return y < other.y;
     }
+
+    Point up()
+    {
+        return Point(x, y - 1);
+    }
+
+    Point down()
+    {
+        return Point(x, y + 1);
+    }
+
+    Point left()
+    {
+        return Point(x - 1, y);
+    }
+
+    Point right()
+    {
+        return Point(x + 1, y);
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Point &p)
+    {
+        os << "(" << p.x << ", " << p.y << ")";
+        return os;
+    }
+
+    bool operator==(const Point &other) const
+    {
+        return x == other.x && y == other.y;
+    }
 };
 
 template <typename T>
@@ -32,6 +63,10 @@ public:
     Grid(const std::vector<std::vector<T>> &rows)
     {
         grid = rows;
+    }
+    Grid(int width, int height, T value)
+    {
+        grid = std::vector<std::vector<T>>(height, std::vector<T>(width, value));
     }
 
     std::vector<std::pair<Point, T>> neighborsWithIndex(int x, int y) const
@@ -72,6 +107,11 @@ public:
         return neighbors;
     }
 
+    T get(Point p) const
+    {
+        return get(p.x, p.y);
+    }
+
     // Function to get the character at a specific position
     T get(int x, int y) const
     {
@@ -101,6 +141,35 @@ public:
     size_t width() const
     {
         return grid.empty() ? 0 : grid[0].size();
+    }
+
+    // Find a value
+    Point find(T value) const
+    {
+        for (int y = 0; y < height(); y++)
+        {
+            for (int x = 0; x < width(); x++)
+            {
+                if (get(x, y) == value)
+                {
+                    return Point(x, y);
+                }
+            }
+        }
+        throw std::invalid_argument("Value not found in grid");
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Grid &grid)
+    {
+        for (auto row : grid.grid)
+        {
+            for (auto col : row)
+            {
+                os << col;
+            }
+            os << std::endl;
+        }
+        return os;
     }
 };
 
