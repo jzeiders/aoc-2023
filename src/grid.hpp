@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "graph/graph.hpp"
 
 struct Point
 {
@@ -157,6 +158,36 @@ public:
             }
         }
         throw std::invalid_argument("Value not found in grid");
+    }
+
+    // Find all values
+    std::vector<Point> findAll(T value) const
+    {
+        std::vector<Point> points;
+        for (int y = 0; y < height(); y++)
+        {
+            for (int x = 0; x < width(); x++)
+            {
+                if (get(x, y) == value)
+                {
+                    points.push_back(Point(x, y));
+                }
+            }
+        }
+        return points;
+    }
+
+    void insertRow(int rowIdx, std::vector<T> row)
+    {
+        grid.insert(grid.begin() + rowIdx, row);
+    }
+
+    void insertCol(int colIdx, std::vector<T> col)
+    {
+        for (int rowIdx = 0; rowIdx < height(); rowIdx++)
+        {
+            grid[rowIdx].insert(grid[rowIdx].begin() + colIdx, col[rowIdx]);
+        }
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Grid &grid)

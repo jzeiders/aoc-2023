@@ -11,6 +11,11 @@ class DirectedGraph
     std::map<N, std::vector<N>> adjacencyList;
 
 public:
+    std::map<N, T> getNodes()
+    {
+        return nodes;
+    }
+
     void addNode(N id, T node)
     {
         nodes[id] = node;
@@ -51,6 +56,7 @@ public:
     {
         std::map<N, int> distances;
         std::set<N> q = {start};
+        distances[start] = 0;
         while (q.size())
         {
             std::set<N> next;
