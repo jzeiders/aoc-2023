@@ -60,6 +60,10 @@ private:
     std::vector<std::vector<T>> grid;
 
 public:
+    Grid(const Grid &g) // Copy Constructor
+        : grid(g.grid)
+    {
+    }
     // Constructor that takes a list of strings to initialize the grid
     Grid(const std::vector<std::vector<T>> &rows)
     {
@@ -121,6 +125,11 @@ public:
             throw std::out_of_range("Grid coordinates out of bounds");
         }
         return grid[y][x];
+    }
+
+    void set(Point p, T value)
+    {
+        set(p.x, p.y, value);
     }
 
     void set(int x, int y, T value)
